@@ -1,17 +1,11 @@
 package com.casestudy.controller;
 
 import com.casestudy.model.Cart;
-import com.casestudy.model.Product;
-import com.casestudy.model.User;
 import com.casestudy.service.cart.CartService;
-import com.casestudy.service.product.ProductService;
-import com.casestudy.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,7 +31,7 @@ public class CartController {
 
     @GetMapping("/list")
     public ModelAndView list(){
-        ModelAndView modelAndView = new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView("cart/index");
         modelAndView.addObject("carts", cartService.findAll());
         return modelAndView;
     }

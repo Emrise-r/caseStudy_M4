@@ -1,6 +1,8 @@
 package com.casestudy.model;
 
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -22,6 +24,8 @@ public class Product {
     private Long quantity;
 
     private String img;
+    @Transient
+    private MultipartFile imgFile;
 
     @OneToMany(mappedBy = "product")
     private Set<Cart> carts;
@@ -92,5 +96,13 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public MultipartFile getImgFile() {
+        return imgFile;
+    }
+
+    public void setImgFile(MultipartFile imgFile) {
+        this.imgFile = imgFile;
     }
 }

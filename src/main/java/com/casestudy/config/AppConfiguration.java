@@ -4,6 +4,8 @@ package com.casestudy.config;
 import com.casestudy.model.Product;
 import com.casestudy.service.cart.CartService;
 import com.casestudy.service.cart.CartServiceImpl;
+import com.casestudy.service.category.CategoryService;
+import com.casestudy.service.category.CategoryServiceImpl;
 import com.casestudy.service.product.ProductService;
 import com.casestudy.service.product.ProductServiceImpl;
 import com.casestudy.service.user.UserService;
@@ -146,6 +148,27 @@ public class AppConfiguration extends WebMvcConfigurerAdapter implements Applica
     @Bean
     public ProductService productService(){
         return new ProductServiceImpl();
+    }
+
+    @Bean
+    public CategoryService categoryService() {
+        return new CategoryServiceImpl();
+    }
+
+    @Bean(name = "multipartResolver")
+    public CommonsMultipartResolver getResolver() throws IOException {
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        resolver.setMaxUploadSizePerFile(10 * 1024 * 1024);//10MB
+        return resolver;
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+
+        String fileUpload = evn.getProperty("file_upload").toString();
+
+        registry.addResourceHandler("/i/**") //
+                .addResourceLocations("file:" + fileUpload);
     }
 
 }
