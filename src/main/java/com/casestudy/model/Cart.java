@@ -10,7 +10,7 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Cart_SEQ")
     @SequenceGenerator(name = "Cart_SEQ", sequenceName = "SEQUENCE_Cart")
-    private Long cart_id;
+    private Long cartId;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -24,12 +24,12 @@ public class Cart {
 
     public Cart() {}
 
-    public Long getCart_id() {
-        return cart_id;
+    public Long getCartId() {
+        return cartId;
     }
 
-    public void setCart_id(Long cart_id) {
-        this.cart_id = cart_id;
+    public void setCartId(Long cartId) {
+        this.cartId = cartId;
     }
 
     public User getUser() {

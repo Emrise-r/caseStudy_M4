@@ -25,8 +25,8 @@
             <td th:text="${cart.orderNumber}"></td>
             <td th:text="${cart.product.name}"></td>
             <td th:text="${cart.user.name}"></td>
-            <td><a th:href="@{/edit-customer/__${cart.cart_id}__}">Edit</a></td>
-            <td><a th:href="@{/delete-customer/__${cart.cart_id}__}">Delete</a></td>
+            <td><a th:href="@{/edit-customer/__${cart.cartId}__}">Edit</a></td>
+            <td><a th:href="@{/delete-customer/__${cart.cartId}__}">Delete</a></td>
         </tr>
     </th:block>
 </table>

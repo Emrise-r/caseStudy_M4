@@ -11,19 +11,19 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Category_SEQ")
     @SequenceGenerator(name = "Category_SEQ", sequenceName = "SEQUENCE_Category")
-    private Long category_id;
+    private Long categoryId;
 
     private String name;
 
     @OneToMany(mappedBy = "category")
     private Set<Product> products;
 
-    public Long getCategory_id() {
-        return category_id;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory_id(Long category_id) {
-        this.category_id = category_id;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getName() {

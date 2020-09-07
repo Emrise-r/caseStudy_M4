@@ -11,7 +11,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Product_SEQ")
     @SequenceGenerator(name = "Product_SEQ", sequenceName = "SEQUENCE_Product")
-    private Long product_id;
+    private Long productId;
 
     private String name;
 
@@ -30,12 +30,12 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    public Long getProduct_id() {
-        return product_id;
+    public Long getProductId() {
+        return productId;
     }
 
-    public void setProduct_id(Long product_id) {
-        this.product_id = product_id;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
     public String getName() {
