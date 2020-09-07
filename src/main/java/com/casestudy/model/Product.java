@@ -19,7 +19,7 @@ public class Product {
 
     private String price;
 
-    private String quantity;
+    private Long quantity;
 
     private String img;
 
@@ -62,11 +62,11 @@ public class Product {
         this.price = price;
     }
 
-    public String getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(Long quantity) {
         this.quantity = quantity;
     }
 
