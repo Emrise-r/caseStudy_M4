@@ -9,7 +9,8 @@ import java.util.Set;
 public class Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Category_SEQ")
+    @SequenceGenerator(name = "Category_SEQ", sequenceName = "SEQUENCE_Category")
     private Long category_id;
 
     private String name;

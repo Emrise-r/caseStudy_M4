@@ -9,7 +9,8 @@ import java.util.Set;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Product_SEQ")
+    @SequenceGenerator(name = "Product_SEQ", sequenceName = "SEQUENCE_Product")
     private Long product_id;
 
     private String name;

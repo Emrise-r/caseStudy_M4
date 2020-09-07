@@ -8,7 +8,8 @@ import javax.persistence.*;
 public class Cart {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Cart_SEQ")
+    @SequenceGenerator(name = "Cart_SEQ", sequenceName = "SEQUENCE_Cart")
     private Long cart_id;
 
     @ManyToOne
