@@ -1,15 +1,15 @@
 package com.casestudy.service.user;
 
+import com.casestudy.exception.UserAlreadyExistException;
 import com.casestudy.model.User;
+import com.casestudy.service.Service;
 
-import java.util.Optional;
+public interface UserService extends Service<User> {
 
-public interface UserService {
-    Iterable<User> findAll();
+    User findByName(String name);
+    boolean nameExists(String email);
+    void registerNewUserAccount(User user)
+            throws UserAlreadyExistException;
+    public void update(User model);
 
-    Optional<User> findByUserId(Long user_id);
-
-    void save(User user);
-
-    void remove(Long user_id);
 }

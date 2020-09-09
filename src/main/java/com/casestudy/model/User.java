@@ -1,6 +1,10 @@
 package com.casestudy.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -13,11 +17,24 @@ public class User {
     @Column(name = "user_id")
     private Long userId;
 
+    @Column(nullable = false, unique = true)
+    @NotEmpty
+    @NotNull
+    @NotBlank
+    @Size(min = 3, max = 12)
     private String name;
 
+    @Column(nullable = false)
+    @NotEmpty
+    @NotNull
+    @NotBlank
+    @Size(min = 6, max = 255)
     private String password;
 
-    private String role;
+
+
+    @ManyToOne
+    public Role role;
 
     private String avatar;
 
@@ -50,11 +67,11 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
@@ -71,6 +88,23 @@ public class User {
     }
 
     public void setCarts(Set<Cart> carts) {
+        this.carts = carts;
+    }
+
+    public User(Long userId, String name, String password, Role role, String avatar, Set<Cart> carts) {
+        this.userId = userId;
+        this.name = name;
+        this.password = password;
+        this.role = role;
+        this.avatar = avatar;
+        this.carts = carts;
+    }
+
+    public User(String name, String password, Role role, String avatar, Set<Cart> carts) {
+        this.name = name;
+        this.password = password;
+        this.role = role;
+        this.avatar = avatar;
         this.carts = carts;
     }
 }

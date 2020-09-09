@@ -1,15 +1,31 @@
 package com.casestudy.service.user;
 
+import com.casestudy.exception.UserAlreadyExistException;
 import com.casestudy.model.User;
 import com.casestudy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
-public class UserServiceImpl implements UserService {
+@Service
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
+    RoleService roleService;
 
     @Override
     public Iterable<User> findAll() {
@@ -17,9 +33,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findByUserId(Long user_id) {
-        return userRepository.findById(user_id);
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
     }
+
+
 
     @Override
     public void save(User user) {
@@ -29,5 +47,43 @@ public class UserServiceImpl implements UserService {
     @Override
     public void remove(Long user_id) {
         userRepository.deleteById(user_id);
+    }
+
+    @Override
+    public User findByName(String name) {
+        return userRepository.findByName(name);
+    }
+
+    @Override
+    public boolean nameExists(String name) {
+        return userRepository.findByName(name) != null;
+    }
+
+    @Override
+    public void registerNewUserAccount(User user) throws UserAlreadyExistException {
+        if (nameExists(user.getName()) == true) {
+            throw new UserAlreadyExistException("Username was existed!");
+        }
+        User newUser = new User();
+        newUser.setName(user.getName());
+        newUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        newUser.setRole(roleService.findByName("ROLE_USER"));
+        newUser.setAvatar(user.getAvatar());
+        userRepository.save(newUser);
+    }
+
+    @Override
+    public void update(User model) {
+
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = this.findByName(username);
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(user.getRole());
+        UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getName()
+        , user.getPassword(), authorities);
+        return userDetails;
     }
 }
