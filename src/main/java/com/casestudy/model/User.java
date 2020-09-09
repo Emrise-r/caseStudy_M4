@@ -28,7 +28,8 @@ public class User{
     @NotEmpty
     @NotNull
     @NotBlank
-    @Size(min = 6, max = 12)
+    @Size(min = 6, max = 255)
+
     private String password;
 
 

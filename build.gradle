@@ -36,6 +36,10 @@
 //    //web service
 //    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.11.0'
 //    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.0'
+
+//}
+
+
 //
 //    compile group: 'org.springframework.security', name: 'spring-security-web', version: '4.2.3.RELEASE'
 //    compile group: 'org.springframework.security', name: 'spring-security-config', version: '4.2.3.RELEASE'
@@ -49,14 +53,20 @@
 //}
 
 
+
 plugins {
     id 'org.springframework.boot' version '2.3.2.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java'
 }
 
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
 group = 'com.codegym'
 version = '0.0.1-SNAPSHOT'
+
 sourceCompatibility = '1.8'
 
 configurations {
@@ -88,6 +98,12 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
 
     compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE'
+
+}
+
+test {
+    useJUnitPlatform()
+
 }
 
 test {

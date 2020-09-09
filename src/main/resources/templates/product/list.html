@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Danh sach product</h1>
+
+<form th:action="@{'/students/search'}" th:method="post">
+
+    <select th:name="category" th:id="category">
+        <th:block th:each="category:${categories}">
+            <option th:value="${category.categoryId}" th:text="${category.name}"></option>
+        </th:block>
+    </select>
+    <!--    <input type="text" name="className">-->
+    <input type="submit" value="search">
+
+</form>
+<table>
+    <tr>
+        <th>name</th>
+        <th>des</th>
+        <th>price</th>
+        <th>Img</th>
+        <th>category</th>
+        <th>Edit</th>
+    </tr>
+    <th:block th:each="product: ${list}">
+        <tr>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.description}"></td>
+            <td th:text="${product.price}"></td>
+            <td><img th:src="@{'/i/'+ ${product.getImg()}}" width="100"/></td>
+            <td th:text="${product.category.name}"></td>
+            <td><a th:href="@{'/product/edit/'+${product.productId}}">Edit</a></td>
+        </tr>
+
+    </th:block>
+</table>
+
+</body>
+</html>
