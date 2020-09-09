@@ -1,62 +1,62 @@
-package com.casestudy.controller;
-
-import com.casestudy.model.Cart;
-import com.casestudy.model.Product;
-import com.casestudy.model.User;
-import com.casestudy.service.cart.CartService;
-import com.casestudy.service.product.ProductService;
-import com.casestudy.service.user.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-@Controller
-@RequestMapping("/cart")
-public class CartController {
-
-
-    @Autowired
-    private CartService cartService;
-
-
-
-//    @ModelAttribute("products")
-//    public Iterable<Product> products(Pageable pageable) {
-//        return productService.findAll(pageable);
-//    }
-
+//package com.casestudy.controller;
+//
+//import com.casestudy.model.Cart;
+//import com.casestudy.model.Product;
+//import com.casestudy.model.User;
+//import com.casestudy.service.cart.CartService;
+//import com.casestudy.service.product.ProductService;
+//import com.casestudy.service.user.UserService;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.data.domain.Pageable;
+//import org.springframework.http.HttpStatus;
+//import org.springframework.http.ResponseEntity;
+//import org.springframework.stereotype.Controller;
+//import org.springframework.stereotype.Repository;
+//import org.springframework.web.bind.annotation.*;
+//import org.springframework.web.servlet.ModelAndView;
+//
+//@Controller
+//@RequestMapping("/cart")
+//public class CartController {
+//
+//
+//    @Autowired
+//    private CartService cartService;
+//
+//
+//
+////    @ModelAttribute("products")
+////    public Iterable<Product> products(Pageable pageable) {
+////        return productService.findAll(pageable);
+////    }
+//
+////    @GetMapping("/list")
+////    public ResponseEntity<Iterable<Cart>> findAll() {
+////        return new ResponseEntity<>(cartService.findAll(), HttpStatus.OK);
+////    }
+//
 //    @GetMapping("/list")
-//    public ResponseEntity<Iterable<Cart>> findAll() {
-//        return new ResponseEntity<>(cartService.findAll(), HttpStatus.OK);
+//    public ModelAndView list(){
+//        ModelAndView modelAndView = new ModelAndView("index");
+//        modelAndView.addObject("carts", cartService.findAll());
+//        return modelAndView;
 //    }
-
-    @GetMapping("/list")
-    public ModelAndView list(){
-        ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("carts", cartService.findAll());
-        return modelAndView;
-    }
-
-    @GetMapping("/create")
-    public ModelAndView create() {
-        ModelAndView modelAndView = new ModelAndView("create");
-        return modelAndView;
-    }
-
-    @PostMapping("/create")
-    public String create(@ModelAttribute("cart") Cart cart){
-        cartService.save(cart);
-        return "redirect:/cart/list";
-    }
-
-    @DeleteMapping("/delete/{cart_id}")
-    public ResponseEntity<Cart> delete(@PathVariable Long cart_id) {
-        cartService.remove(cart_id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-}
+//
+//    @GetMapping("/create")
+//    public ModelAndView create() {
+//        ModelAndView modelAndView = new ModelAndView("create");
+//        return modelAndView;
+//    }
+//
+//    @PostMapping("/create")
+//    public String create(@ModelAttribute("cart") Cart cart){
+//        cartService.save(cart);
+//        return "redirect:/cart/list";
+//    }
+//
+//    @DeleteMapping("/delete/{cart_id}")
+//    public ResponseEntity<Cart> delete(@PathVariable Long cart_id) {
+//        cartService.remove(cart_id);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+//}

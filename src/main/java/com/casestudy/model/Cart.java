@@ -2,14 +2,13 @@ package com.casestudy.model;
 
 import javax.persistence.*;
 
-
 @Entity
 @Table(name = "cart")
 public class Cart {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Cart_SEQ")
-    @SequenceGenerator(name = "Cart_SEQ", sequenceName = "SEQUENCE_Cart")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @SequenceGenerator(name = "Cart_SEQ", sequenceName = "SEQUENCE_Cart", allocationSize = 1)
     private Long cartId;
 
     @ManyToOne
