@@ -2,7 +2,6 @@ package com.casestudy.model;
 
 import javax.persistence.*;
 
-
 @Entity
 @Table(name = "cart")
 public class Cart {

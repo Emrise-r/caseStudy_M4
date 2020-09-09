@@ -1,5 +1,6 @@
 package com.casestudy;
 
+<<<<<<< HEAD
 import com.casestudy.service.cart.CartService;
 import com.casestudy.service.cart.CartServiceImpl;
 import com.casestudy.service.category.CategoryService;
@@ -11,12 +12,17 @@ import com.casestudy.service.user.UserServiceImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+=======
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+>>>>>>> thinh
 
 @SpringBootApplication
 public class caseStudy_M4Application {
     public static void main(String[] args) {
         SpringApplication.run(caseStudy_M4Application.class, args);
     }
+<<<<<<< HEAD
 
     @Bean
     public CartService cartService() {
@@ -37,4 +43,6 @@ public class caseStudy_M4Application {
     public CategoryService categoryService() {
         return new CategoryServiceImpl();
     }
+=======
+>>>>>>> thinh
 }
