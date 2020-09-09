@@ -65,6 +65,7 @@ public class ProductController {
         product.setDescription(productForm.getDescription());
         product.setPrice(productForm.getPrice());
         product.setQuantity(productForm.getQuantity());
+        product.setCategory(productForm.getCategory());
         productService.save(product);
         return new ModelAndView("/product/create", "product", new Product());
 

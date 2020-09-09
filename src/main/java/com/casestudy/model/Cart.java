@@ -9,7 +9,7 @@ public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Cart_SEQ")
-    @SequenceGenerator(name = "Cart_SEQ", sequenceName = "SEQUENCE_Cart")
+    @SequenceGenerator(name = "Cart_SEQ", sequenceName = "SEQUENCE_Cart", allocationSize = 1)
     private Long cartId;
 
     @ManyToOne
