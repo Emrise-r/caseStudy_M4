@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Optional;
+
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
@@ -17,8 +19,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product findByProductId(Long product_id) {
-        return productRepository.findOne(product_id);
+    public Optional<Product> findByProductId(Long product_id) {
+        return productRepository.findById(product_id);
     }
 
     @Override
@@ -28,6 +30,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void remove(Long productId) {
-        productRepository.delete(productId);
+        productRepository.deleteById(productId);
     }
 }

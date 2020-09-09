@@ -4,6 +4,8 @@ import com.casestudy.model.User;
 import com.casestudy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Optional;
+
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -15,8 +17,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByUserId(Long user_id) {
-        return userRepository.findOne(user_id);
+    public Optional<User> findByUserId(Long user_id) {
+        return userRepository.findById(user_id);
     }
 
     @Override
@@ -26,6 +28,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void remove(Long user_id) {
-        userRepository.delete(user_id);
+        userRepository.deleteById(user_id);
     }
 }

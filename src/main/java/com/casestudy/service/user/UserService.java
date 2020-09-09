@@ -2,10 +2,12 @@ package com.casestudy.service.user;
 
 import com.casestudy.model.User;
 
+import java.util.Optional;
+
 public interface UserService {
     Iterable<User> findAll();
 
-    User findByUserId(Long user_id);
+    Optional<User> findByUserId(Long user_id);
 
     void save(User user);
 

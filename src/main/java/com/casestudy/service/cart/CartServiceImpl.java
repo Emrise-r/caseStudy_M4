@@ -5,6 +5,8 @@ import com.casestudy.model.User;
 import com.casestudy.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Optional;
+
 public class CartServiceImpl implements CartService {
 
     @Autowired
@@ -17,8 +19,8 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Cart findByCartId(Long cart_id) {
-        return cartRepository.findOne(cart_id);
+    public Optional<Cart> findByCartId(Long cart_id) {
+        return cartRepository.findById(cart_id);
     }
 
     @Override
@@ -28,7 +30,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void remove(Long cart_id) {
-        cartRepository.delete(cart_id);
+        cartRepository.deleteById(cart_id);
     }
 
     @Override

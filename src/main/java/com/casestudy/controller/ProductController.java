@@ -12,7 +12,6 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -53,7 +52,7 @@ public class ProductController {
 
         MultipartFile file = productForm.getImgFile();
         String image = file.getOriginalFilename();
-        String fileUpload = evn.getProperty("file_upload").toString();
+        String fileUpload = evn.getProperty("upload.path").toString();
         try {
             FileCopyUtils.copy(file.getBytes(), new File(fileUpload + image));
         } catch (IOException e) {

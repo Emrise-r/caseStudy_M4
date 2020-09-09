@@ -4,6 +4,8 @@ import com.casestudy.model.Category;
 import com.casestudy.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Optional;
+
 public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
@@ -15,8 +17,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category findByCategoryId(Long categoryId) {
-        return categoryRepository.findOne(categoryId);
+    public Optional<Category> findByCategoryId(Long categoryId) {
+        return categoryRepository.findById(categoryId);
     }
 
     @Override
@@ -26,6 +28,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void remove(Long categoryId) {
-        categoryRepository.delete(categoryId);
+        categoryRepository.deleteById(categoryId);
     }
 }
