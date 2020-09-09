@@ -16,7 +16,7 @@ body{
 .login-form{
     width: 470px;
     opacity: 95%;
-    background-image: linear-gradient(to bottom, antiquewhite, #ffbbfe);
+    background-image: linear-gradient(to bottom, antiquewhite, yellowgreen);
     padding:30px 60px;
 }
 
