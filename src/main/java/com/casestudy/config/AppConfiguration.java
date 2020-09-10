@@ -49,7 +49,7 @@
 //@EnableAspectJAutoProxy
 //@PropertySource("classpath:application.properties")
 //@EnableSpringDataWebSupport
-//public class AppConfiguration extends WebMvcConfigurerAdapter implements ApplicationContextAware {
+//public class AppConfiguration extends  WebMvcConfigurerAdapter implements ApplicationContextAware {
 //    private ApplicationContext applicationContext;
 //
 //    @Override
