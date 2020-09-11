@@ -31,7 +31,7 @@ public class caseStudy_M4Application extends WebMvcConfigurerAdapter {
 
         String fileUpload = env.getProperty("file_upload").toString();
 
-        // Image resource.
+        // Image.
         registry.addResourceHandler("/i/**") //
                 .addResourceLocations("file:" + fileUpload);
     }
