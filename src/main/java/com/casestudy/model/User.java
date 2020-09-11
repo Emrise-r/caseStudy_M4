@@ -31,7 +31,6 @@ public class User{
     private String password;
 
 
-
     @ManyToOne
     public Role role;
 
