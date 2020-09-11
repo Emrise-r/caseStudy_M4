@@ -48,6 +48,14 @@
             <p th:each="error : ${#fields.errors('password')}" th:text="${error}"></p>
         </div>
 
+        <div style="height: 15px">
+            <th:block th:if="${message}"><p th:text="${message}" style="color: red; text-align: center"></p></th:block>
+        </div>
+
+        <div style="height: 15px">
+            <th:block th:if="${message1}"><p th:text="${message1}" style="color: green; text-align: center"></p></th:block>
+        </div>
+
 
 
 <!--        <div style="height: 15px">-->
@@ -59,7 +67,6 @@
 
     </form>
 </div>
-<!--&lt;!&ndash;END OF CONTENT&ndash;&gt;-->
 <!--<script th:src="@{/javascript/log-in-button.js}"></script>-->
 </body>
 </html>

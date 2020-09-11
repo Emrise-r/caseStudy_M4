@@ -36,7 +36,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/home").permitAll()
+                .antMatchers("/cart").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/admin/").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/product/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/user/").access("hasRole('ROLE_USER')")
                 .and()
                 .formLogin()
@@ -49,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/home/logout"))
-                    .logoutSuccessUrl("/home")
+//                    .logoutSuccessUrl("/home")
                 .permitAll()
                 .and().exceptionHandling().accessDeniedPage("/error");
         http.csrf().disable();
