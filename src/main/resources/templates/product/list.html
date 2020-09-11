@@ -32,11 +32,11 @@
             <td th:text="${product.name}"></td>
             <td th:text="${product.description}"></td>
             <td th:text="${product.price}"></td>
-            <td><img th:src="@{'/i/'+ ${product.getImg()}}" width="100"/></td>
+            <td th:text="${product.img}"></td>
+            <td><img th:src="@{'/i/'+${product.img}}" width="100"/></td>
             <td th:text="${product.category.name}"></td>
             <td><a th:href="@{'/product/edit/'+${product.productId}}">Edit</a></td>
         </tr>
-
     </th:block>
 </table>
 

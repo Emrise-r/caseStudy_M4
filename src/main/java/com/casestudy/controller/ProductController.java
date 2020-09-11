@@ -52,7 +52,7 @@ public class ProductController {
 
         MultipartFile file = productForm.getImgFile();
         String image = file.getOriginalFilename();
-        String fileUpload = evn.getProperty("upload.path").toString();
+        String fileUpload = evn.getProperty("file_upload").toString();
         try {
             FileCopyUtils.copy(file.getBytes(), new File(fileUpload + image));
         } catch (IOException e) {

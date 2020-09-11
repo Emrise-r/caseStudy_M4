@@ -4,9 +4,11 @@ import com.casestudy.model.Cart;
 import com.casestudy.model.User;
 import com.casestudy.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class CartServiceImpl implements CartService {
 
     @Autowired
