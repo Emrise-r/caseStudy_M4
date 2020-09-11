@@ -2,10 +2,11 @@ plugins {
     id 'org.springframework.boot' version '2.3.2.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java'
+    id 'war'
 }
 
 
-group 'org.example'
+group 'com.casestudy'
 version '1.0-SNAPSHOT'
 
 group = 'com.codegym'
@@ -43,13 +44,4 @@ dependencies {
 
     compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE'
 
-}
-
-test {
-    useJUnitPlatform()
-
-}
-
-test {
-    useJUnitPlatform()
 }
