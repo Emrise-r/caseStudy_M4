@@ -5,9 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("storage")
 public class StorageProperties {
 
-    /**
-     * Folder location for storing files
-     */
+//    Duong dan file
     private String location = "D:/dowfile/";
 
     public String getLocation() {
@@ -17,5 +15,4 @@ public class StorageProperties {
     public void setLocation(String location) {
         this.location = location;
     }
-
 }
