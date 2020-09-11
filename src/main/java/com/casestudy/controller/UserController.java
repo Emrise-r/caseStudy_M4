@@ -1,7 +1,9 @@
 package com.casestudy.controller;
 
+import com.casestudy.exception.NotFoundException;
 import com.casestudy.exception.UserAlreadyExistException;
 import com.casestudy.model.User;
+import com.casestudy.service.product.ProductService;
 import com.casestudy.service.user.RoleService;
 import com.casestudy.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,21 +11,18 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/home")
 public class UserController {
-//    @Autowired
-//    ProductService productService;
+
+    @Autowired
+    ProductService productServiceImpl;
 
     @Autowired
     UserService userServiceImpl;
@@ -46,6 +45,7 @@ public class UserController {
         return username;
     }
 
+
     @GetMapping("/login")
     public ModelAndView login() {
         return new ModelAndView(("login"));
@@ -53,7 +53,7 @@ public class UserController {
 
     @GetMapping("/logout")
     public String logout() {
-        return "redirect:/login";
+        return "redirect:/home/login";
     }
 
     @GetMapping()
@@ -71,19 +71,56 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public ModelAndView saveUser(@ModelAttribute("user") @Valid User user, HttpServletRequest request, Errors errors) {
+    public ModelAndView saveUser(@ModelAttribute("user") @Valid User user) {
         try {
             userServiceImpl.registerNewUserAccount(user);
         } catch (UserAlreadyExistException e) {
             ModelAndView modelAndView = new ModelAndView("signUp");
-            modelAndView.addObject("message", "Existed");
+            modelAndView.addObject("message", "Account Existed");
             return modelAndView;
         }
         ModelAndView modelAndView = new ModelAndView("signUp");
-        modelAndView.addObject("message", "Successfully");
+        modelAndView.addObject("message1", "Successfully Registration");
         modelAndView.addObject("user", user);
         return modelAndView;
     }
+
+    @GetMapping("/edit")
+    public ModelAndView formEdit() {
+        ModelAndView modelAndView = new ModelAndView("editUser");
+        modelAndView.addObject("user", userServiceImpl.findByName(getPrincipal()));
+        return modelAndView;
+    }
+
+    @PostMapping("/edit")
+    public ModelAndView saveEdit(@ModelAttribute("user") @Valid User user) {
+
+        String pwEn = passwordEncoder.encode(user.getPassword());
+        user.setPassword(pwEn);
+        user.setRole(roleServiceImpl.findByName("ROLE_USER"));
+        userServiceImpl.save(user);
+        ModelAndView modelAndView = new ModelAndView("editUser");
+        modelAndView.addObject("message", "Update password successfully");
+        return modelAndView;
+    }
+
+    @GetMapping("/listUser")
+    public ModelAndView listUser() {
+        Iterable<User> users = userServiceImpl.findAll();
+        ModelAndView modelAndView = new ModelAndView("listUser");
+        modelAndView.addObject("users", users);
+        return modelAndView;
+    }
+
+//    @GetMapping("/listUser/delete/{userId}")
+//    public ModelAndView showDeleteForm(@PathVariable Long userId) throws NotFoundException {
+//        Optional<User> user = userServiceImpl.findById(userId);
+//        if (user != null) {
+//            ModelAndView modelAndView =
+//        }
+//    }
+
+
 
 
 
