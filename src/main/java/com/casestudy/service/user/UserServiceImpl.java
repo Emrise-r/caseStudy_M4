@@ -1,6 +1,7 @@
 package com.casestudy.service.user;
 
 import com.casestudy.exception.UserAlreadyExistException;
+import com.casestudy.model.Role;
 import com.casestudy.model.User;
 import com.casestudy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public User findByName(String name) {
         return userRepository.findByName(name);
     }
+
+//    @Override
+//    public User findByRole(Role role) {
+//        return userRepository.findByRole(role);
+//    }
 
     @Override
     public boolean nameExists(String name) {

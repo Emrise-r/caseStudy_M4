@@ -27,7 +27,7 @@
         <th>category</th>
         <th>Edit</th>
     </tr>
-    <th:block th:each="product: ${list}">
+    <th:block th:each="product: ${products}">
         <tr>
             <td th:text="${product.name}"></td>
             <td th:text="${product.description}"></td>

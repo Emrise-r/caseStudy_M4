@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style-home.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css_2/style-home.css}">
     <title>Web</title>
 
 </head>
@@ -32,14 +32,18 @@
             <!--Right button-->
             <ul class="navbar-nav ml-auto">
                 <!--User-->
-                <!--                <li class="nav-item">-->
+                                <li class="nav-item">
                 <a sec:authorize="isAuthenticated()" class="nav-link" href="/home/edit"><i class="fa fa-user" aria-hidden="true"></i><span th:text="${username}" style="font-weight: bold"></span></a>
-                <!--                </li>-->
+                                </li>
+
+
 
                 <!--Cart-->
                 <li class="nav-item">
                     <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/cart/}"><i class="fas fa-shopping-cart"></i> YOUR CART</a>
                 </li>
+
+
 
                 <!--Sign out-->
                 <li class="nav-item">
@@ -50,11 +54,10 @@
         </div>
     </nav>
 
+    <!--2ND NAVIGATION BAR-->
     <div>
         <nav class="navbar navbar-expand-md navbar-light mx-lg-5 pb-3">
             <div class="collapse navbar-collapse">
-
-
                 <form class="form-inline ml-auto" method="post" th:action="@{/product/findSkuByProductName}">
                     <div class="input-group">
                         <div class="input-group-prepend">

@@ -5,9 +5,13 @@ import com.casestudy.model.Category;
 import com.casestudy.model.Product;
 import com.casestudy.service.category.CategoryService;
 import com.casestudy.service.product.ProductService;
+import com.casestudy.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +23,8 @@ import java.io.IOException;
 @RequestMapping("/product")
 public class ProductController {
 
+//    private static String username = null;
+
     @Autowired
     Environment evn;
 
@@ -28,6 +34,47 @@ public class ProductController {
     @Autowired
     CategoryService categoryService;
 
+    @Autowired
+    UserService userService;
+//    RoleService roleService;
+
+    @ModelAttribute("username")
+    public String getPrincipal() {
+        String username = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        return username;
+    }
+
+    @ModelAttribute("role")
+    public String getRole() {
+        String name = this.getPrincipal();
+        if (name.contains("anonymousUser")  ) {
+            return null;
+        } else {
+            return userService.findByName(name).getRole().getName();
+        }
+    }
+
+//    @ModelAttribute("authentication")
+//    public String getAuthentication() {
+//        String authentication = null;
+//        Object principal = SecurityContextHolder.getContext().getAuthentication();
+//
+//        if (principal instanceof UserDetails) {
+//            authentication = ((Authentication)principal).getName();
+//        } else {
+//            authentication = principal.toString();
+//        }
+//        return authentication;
+//    }
+
+
     @ModelAttribute("categories")
     public Iterable<Category> categories() {
         return categoryService.findAll();
@@ -35,8 +82,9 @@ public class ProductController {
 
     @GetMapping()
     public ModelAndView index(Pageable pageable){
-        ModelAndView modelAndView = new ModelAndView("product/list");
-        modelAndView.addObject("list", productService.findAll(pageable));
+
+        ModelAndView modelAndView = new ModelAndView("/eshopper/index");
+        modelAndView.addObject("products", productService.findAll(pageable));
         return modelAndView;
     }
 
