@@ -13,4 +13,5 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
     Iterable<User> findAllByRole(Role role);
 
+//    User findByRole(Role role);
 }
