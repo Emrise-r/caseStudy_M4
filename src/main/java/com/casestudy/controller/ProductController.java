@@ -35,8 +35,8 @@ public class ProductController {
 
     @GetMapping()
     public ModelAndView index(Pageable pageable){
-        ModelAndView modelAndView = new ModelAndView("product/list");
-        modelAndView.addObject("list", productService.findAll(pageable));
+        ModelAndView modelAndView = new ModelAndView("/eshop/eshopper/index");
+        modelAndView.addObject("products", productService.findAll(pageable));
         return modelAndView;
     }
 

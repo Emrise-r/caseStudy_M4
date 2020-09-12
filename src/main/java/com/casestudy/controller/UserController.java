@@ -2,6 +2,7 @@ package com.casestudy.controller;
 
 import com.casestudy.exception.NotFoundException;
 import com.casestudy.exception.UserAlreadyExistException;
+import com.casestudy.model.Role;
 import com.casestudy.model.User;
 import com.casestudy.service.product.ProductService;
 import com.casestudy.service.user.RoleService;
