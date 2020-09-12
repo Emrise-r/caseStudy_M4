@@ -113,13 +113,24 @@ public class UserController {
         return modelAndView;
     }
 
-//    @GetMapping("/listUser/delete/{userId}")
-//    public ModelAndView showDeleteForm(@PathVariable Long userId) throws NotFoundException {
-//        Optional<User> user = userServiceImpl.findById(userId);
-//        if (user != null) {
-//            ModelAndView modelAndView =
-//        }
-//    }
+    @GetMapping("/listUser/delete/{userId}")
+    public ModelAndView showDeleteForm(@PathVariable Long userId) throws NotFoundException {
+        User user = userServiceImpl.findById(userId);
+        ModelAndView modelAndView;
+        if (user != null) {
+            modelAndView = new ModelAndView("deleteUser");
+            modelAndView.addObject("user", user);
+        } else {
+            modelAndView = new ModelAndView("error");
+        }
+        return modelAndView;
+    }
+
+    @PostMapping("/listUser/delete")
+    public String deleteUser(@ModelAttribute("user") User user) {
+        userServiceImpl.remove(user.getUserId());
+        return "redirect:/home/listUser";
+    }
 
 
 
