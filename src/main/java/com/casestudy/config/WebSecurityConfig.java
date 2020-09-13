@@ -34,12 +34,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/js/**","/css/**","/css_2/**","/documentation/**","/javascript/**","/fonts/**","/img/**","/javascript/**").permitAll()
+                .antMatchers("/js/**","/css/**","/css_2/**","/documentation/**","/javascript/**","/fonts/**","/images/**","/img/**","/javascript/**").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/home").permitAll()
                 .antMatchers("/cart").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/home/listUser").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/admin/").access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/product/create/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/product/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/user/").access("hasRole('ROLE_USER')")
                 .and()
                 .formLogin()

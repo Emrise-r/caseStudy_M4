@@ -8,7 +8,10 @@ import com.casestudy.service.product.ProductService;
 import com.casestudy.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,8 +19,10 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/product")
@@ -96,7 +101,7 @@ public class ProductController {
     }
 
     @PostMapping("/create")
-    public ModelAndView createStudent(@ModelAttribute Product productForm){
+    public ModelAndView createNewProduct(@ModelAttribute Product productForm){
 
         MultipartFile file = productForm.getImgFile();
         String image = file.getOriginalFilename();
@@ -114,8 +119,82 @@ public class ProductController {
         product.setQuantity(productForm.getQuantity());
         product.setCategory(productForm.getCategory());
         productService.save(product);
-        return new ModelAndView("/product/create", "product", new Product());
-
+        ModelAndView modelAndView = new ModelAndView("/product/create");
+        modelAndView.addObject("product", new Product());
+        modelAndView.addObject("message", "New product was created successfully!");
+        return modelAndView;
     }
+
+    @GetMapping("/list")
+    public ModelAndView showList(@RequestParam("s") Optional<String> keyword, @RequestParam("page") Optional<Integer> page) {
+        ModelAndView modelAndView = new ModelAndView("/product/list");
+        Page<Product> products;
+        int pageNum = 0;
+        if (page.isPresent() && page.get() > 0) pageNum = page.get() - 1;
+        Pageable pageRequest = PageRequest.of(pageNum, 10);
+        if (keyword.isPresent()) {
+            products = productService.findAllByNameContaining(keyword.get(), pageRequest);
+            modelAndView.addObject("keyword", keyword.get());
+        } else {
+            products = productService.findAll(pageRequest);
+        }
+        modelAndView.addObject("products", products);
+        return modelAndView;
+    }
+
+    @GetMapping("/edit-product/{id}")
+    public ModelAndView showEditForm(@PathVariable Long id) {
+        Product product = productService.findByProductId(id);
+        ModelAndView modelAndView;
+        if(product != null) {
+            modelAndView = new ModelAndView("/product/edit");
+            modelAndView.addObject("product", product);
+        } else {
+            modelAndView = new ModelAndView("/error");
+        }
+        return modelAndView;
+    }
+
+
+    // edit không hiện ảnh hiện tại & k up đc ảnh thay thế
+    @PostMapping("/edit-product")
+    public ModelAndView updateProduct(@ModelAttribute("product") Product product) {
+        MultipartFile file = product.getImgFile();
+        String image = file.getOriginalFilename();
+        String fileUpload = evn.getProperty("file_upload").toString();
+        try {
+            FileCopyUtils.copy(file.getBytes(), new File(fileUpload + image));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        productService.save(product);
+        ModelAndView modelAndView = new ModelAndView("/product/edit");
+        modelAndView.addObject("product", product);
+        modelAndView.addObject("message", "Product updated successfully");
+        return modelAndView;
+    }
+
+    @GetMapping("/delete-product/{id}")
+    public ModelAndView showDeleteForm(@PathVariable Long id){
+        Product product = productService.findByProductId(id);
+        ModelAndView modelAndView;
+        if(product != null) {
+            modelAndView = new ModelAndView("/product/delete");
+            modelAndView.addObject("product", product);
+
+        }else {
+            modelAndView = new ModelAndView("/error");
+        }
+        return modelAndView;
+    }
+
+    @PostMapping("/delete-product")
+    public String deleteProduct(@ModelAttribute("product") Product product){
+        productService.remove(product.getProductId());
+        return "redirect:/product/list";
+    }
+
+
+
 
 }
