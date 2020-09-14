@@ -156,7 +156,7 @@ public class ProductController {
     }
 
 
-    // edit không hiện ảnh hiện tại & k up đc ảnh thay thế
+
     @PostMapping("/edit-product")
     public ModelAndView updateProduct(@ModelAttribute("product") Product product) {
         MultipartFile file = product.getImgFile();
