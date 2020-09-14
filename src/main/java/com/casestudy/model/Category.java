@@ -22,6 +22,7 @@ public class Category {
         return categoryId;
     }
 
+
     public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }

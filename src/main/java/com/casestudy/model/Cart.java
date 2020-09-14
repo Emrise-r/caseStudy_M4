@@ -19,6 +19,16 @@ public class Cart {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    private int quantity;
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     private Long orderNumber;
 
     public Cart() {}
