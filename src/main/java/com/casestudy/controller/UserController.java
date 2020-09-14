@@ -44,7 +44,6 @@ public class UserController {
         return username;
     }
 
-
     @GetMapping("/login")
     public ModelAndView login() {
         return new ModelAndView(("login"));
@@ -128,9 +127,4 @@ public class UserController {
         userServiceImpl.remove(user.getUserId());
         return "redirect:/home/listUser";
     }
-
-
-
-
-
 }
