@@ -35,9 +35,15 @@
         </tr>
 
         <tr>
+            <td>Current image</td>
+            <td><img th:src="@{'/i/'+${product.img}}" width="150" height="100"/></td>
+        </tr><br>
+
+
+        <tr>
             <td>Image</td>
             <td><input type="file" th:field="*{imgFile}"></td>
-        </tr>
+        </tr><br>
 
         <tr>
             <td>Category:</td>

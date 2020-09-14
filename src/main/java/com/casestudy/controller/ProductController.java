@@ -167,6 +167,7 @@ public class ProductController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        product.setImg(image);
         productService.save(product);
         ModelAndView modelAndView = new ModelAndView("/product/edit");
         modelAndView.addObject("product", product);
