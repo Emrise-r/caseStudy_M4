@@ -4,6 +4,7 @@ package com.casestudy.model;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
@@ -15,12 +16,16 @@ public class Product {
 //    @SequenceGenerator(name = "Product_SEQ", sequenceName = "SEQUENCE_Product", allocationSize = 1)
     private Long productId;
 
+    @NotNull
     private String name;
 
+    @NotNull
     private String description;
 
+    @NotNull
     private String price;
 
+    @NotNull
     private Long quantity;
 
     private String img;

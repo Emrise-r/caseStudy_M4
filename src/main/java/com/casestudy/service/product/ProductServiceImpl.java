@@ -1,5 +1,6 @@
 package com.casestudy.service.product;
 
+import com.casestudy.model.Category;
 import com.casestudy.model.Product;
 import com.casestudy.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<Product> findByProductId(Long product_id) {
-        return productRepository.findById(product_id);
+    public Product findByProductId(Long product_id) {
+        return productRepository.findById(product_id).orElse(null);
     }
 
     @Override
@@ -33,5 +34,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void remove(Long productId) {
         productRepository.deleteById(productId);
+    }
+
+    @Override
+    public Iterable<Product> findAllByCategory(Category category, Pageable pageable) {
+        return productRepository.findAllByCategory(category, pageable);
+    }
+
+    @Override
+    public Page<Product> findAllByNameContaining(String name, Pageable pageable) {
+        return productRepository.findAllByNameContaining(name, pageable);
     }
 }

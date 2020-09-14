@@ -2,7 +2,6 @@ package com.casestudy.controller;
 
 import com.casestudy.exception.NotFoundException;
 import com.casestudy.exception.UserAlreadyExistException;
-import com.casestudy.model.Role;
 import com.casestudy.model.User;
 import com.casestudy.service.product.ProductService;
 import com.casestudy.service.user.RoleService;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/home")
@@ -95,7 +93,6 @@ public class UserController {
 
     @PostMapping("/edit")
     public ModelAndView saveEdit(@ModelAttribute("user") @Valid User user) {
-
         String pwEn = passwordEncoder.encode(user.getPassword());
         user.setPassword(pwEn);
         user.setRole(roleServiceImpl.findByName("ROLE_USER"));
