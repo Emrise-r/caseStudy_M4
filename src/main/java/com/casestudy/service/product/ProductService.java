@@ -14,7 +14,7 @@ public interface ProductService {
 
     void remove(Long product_id);
 
-    Iterable<Product> findAllByCategory(Category category, Pageable pageable);
+    Page<Product> findAllByCategory(Category category, Pageable pageable);
 
     Page<Product> findAllByNameContaining(String name, Pageable pageable);
 

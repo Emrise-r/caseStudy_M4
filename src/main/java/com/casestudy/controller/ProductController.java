@@ -3,6 +3,7 @@ package com.casestudy.controller;
 
 import com.casestudy.model.Category;
 import com.casestudy.model.Product;
+import com.casestudy.repository.ProductRepository;
 import com.casestudy.service.category.CategoryService;
 import com.casestudy.service.product.ProductService;
 import com.casestudy.service.user.UserService;
@@ -42,6 +43,8 @@ public class ProductController {
     @Autowired
     UserService userService;
 //    RoleService roleService;
+    @Autowired
+    ProductRepository productRepository;
 
     @ModelAttribute("username")
     public String getPrincipal() {
@@ -197,8 +200,39 @@ public class ProductController {
         productService.remove(product.getProductId());
         return "redirect:/product/list";
     }
+    @GetMapping("/category_product/{categoryId}")
+    public ModelAndView showProductByCategory(@PathVariable Long categoryId,Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("/eshopper/index");
+        Category category = categoryService.findByCategoryId(categoryId);
+        Page<Product> products = productService.findAllByCategory(category,pageable);
+        modelAndView.addObject("products", products);
+        return modelAndView;
+    }
+    @GetMapping("/sort/Descending")
+    public ModelAndView listProductWeak(){
+        ModelAndView modelAndView= new ModelAndView("/eshopper/index");
+        Sort sort= Sort.by("price");
+        sort=sort.ascending();
+        Iterable<Product> products = productRepository.findAll(sort);
+        modelAndView.addObject("products", products);
+        return modelAndView;
+    }
 
+    @GetMapping("/sort/Ascending")
+    public ModelAndView listProductIncrease(){
+        ModelAndView modelAndView= new ModelAndView("/eshopper/index");
+        Sort sort= Sort.by("price");
+        sort=sort.descending();
+        Iterable<Product> products = productRepository.findAll(sort);
+        modelAndView.addObject("products", products);
+        return modelAndView;
+    }
 
-
-
+    @GetMapping("/products/{productId}")
+    public ModelAndView showLists(@PathVariable Long productId) {
+        ModelAndView modelAndView= new ModelAndView("/eshopper/product-details");
+        Product product = productService.findByProductId(productId);
+        modelAndView.addObject("products", product);
+        return modelAndView;
+    }
 }
