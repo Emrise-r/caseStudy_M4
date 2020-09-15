@@ -39,6 +39,16 @@ public class User{
     @OneToMany(mappedBy = "user")
     private Set<Cart> carts;
 
+    private Long orderNumber;
+
+    public Long getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(Long orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
     public User() {}
 
     public Long getUserId() {

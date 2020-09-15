@@ -1,6 +1,7 @@
 package com.casestudy.service.cart;
 
 import com.casestudy.model.Cart;
+import com.casestudy.model.Product;
 import com.casestudy.model.User;
 
 import java.util.Optional;
@@ -18,5 +19,9 @@ public interface CartService {
 
     Iterable<Cart> findAllByUser(User user);
 
-    Iterable<Cart> findAllByOrderNumberContaining(Long orderNumber);
+    Iterable<Cart> findAllByOrderNumberAndUser(Long orderNumber, User user);
+
+    Cart findByProductAndUser(Product product, User user);
+
+    Long countByOrderNumberAndUser(Long orderNumber, User user);
 }

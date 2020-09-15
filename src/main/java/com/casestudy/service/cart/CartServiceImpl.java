@@ -1,11 +1,13 @@
 package com.casestudy.service.cart;
 
 import com.casestudy.model.Cart;
+import com.casestudy.model.Product;
 import com.casestudy.model.User;
 import com.casestudy.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @Service
@@ -41,7 +43,17 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Iterable<Cart> findAllByOrderNumberContaining(Long orderNumber) {
-        return cartRepository.findAllByOrderNumberContaining(orderNumber);
+    public Iterable<Cart> findAllByOrderNumberAndUser(Long orderNumber, User user) {
+        return cartRepository.findAllByOrderNumberAndUser(orderNumber, user);
+    }
+
+    @Override
+    public Cart findByProductAndUser(Product product, User user) {
+        return cartRepository.findByProductAndUser(product, user);
+    }
+
+    @Override
+    public Long countByOrderNumberAndUser(Long orderNumber, User user) {
+        return Long.valueOf(((Collection<?>) this.findAllByOrderNumberAndUser(orderNumber, user)).size());
     }
 }

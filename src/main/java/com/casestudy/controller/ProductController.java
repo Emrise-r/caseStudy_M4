@@ -66,19 +66,6 @@ public class ProductController {
         }
     }
 
-//    @ModelAttribute("authentication")
-//    public String getAuthentication() {
-//        String authentication = null;
-//        Object principal = SecurityContextHolder.getContext().getAuthentication();
-//
-//        if (principal instanceof UserDetails) {
-//            authentication = ((Authentication)principal).getName();
-//        } else {
-//            authentication = principal.toString();
-//        }
-//        return authentication;
-//    }
-
 
     @ModelAttribute("categories")
     public Iterable<Category> categories() {
@@ -86,11 +73,25 @@ public class ProductController {
     }
 
     @GetMapping()
-    public ModelAndView index(Pageable pageable){
-
+    public ModelAndView index(@RequestParam("s") Optional<String> keyword, @RequestParam("page") Optional<Integer> page){
         ModelAndView modelAndView = new ModelAndView("/eshopper/index");
-        modelAndView.addObject("products", productService.findAll(pageable));
+        Page<Product> products;
+        int pageNum = 0;
+        if (page.isPresent() && page.get() > 0) pageNum = page.get() - 1;
+        Pageable pageRequest = PageRequest.of(pageNum, 9);
+        if (keyword.isPresent()) {
+            products = productService.findAllByNameContaining(keyword.get(), pageRequest);
+            modelAndView.addObject( "keyword", keyword.get());
+        } else {
+            products = productService.findAll(pageRequest);
+        }
+        modelAndView.addObject("products", products);
         return modelAndView;
+
+
+//        ModelAndView modelAndView = new ModelAndView("/eshopper/index");
+//        modelAndView.addObject("products", productService.findAll(pageable));
+//        return modelAndView;
     }
 
     @GetMapping("/create")
@@ -99,6 +100,8 @@ public class ProductController {
         modelAndView.addObject("product", new Product());
         return modelAndView;
     }
+
+
 
     @PostMapping("/create")
     public ModelAndView createNewProduct(@ModelAttribute Product productForm){

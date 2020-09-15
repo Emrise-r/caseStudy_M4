@@ -94,7 +94,7 @@
 <!--								<a sec:authorize="isAuthenticated()" class="nav-link" href="/home/edit"><i class="fa fa-user" aria-hidden="true"></i><span th:text="${username}" style="font-weight: bold"></span></a>-->
 <!--								<li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>-->
 <!--								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>-->
-								<li><a  class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/cart/}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li><a  class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/cart/}"><i class="fa fa-shopping-cart"></i>Cart</a></li>
 <!--								<li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>-->
 								<li class="nav-item">
 									<a class="nav-link" sec:authorize="isAuthenticated()" href="/home/logout"><i class="fa fa-sign-out"></i>SIGN OUT</a>
@@ -206,9 +206,6 @@
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"  ><!--features_items-->
 						<h2 class="title text-center">Features Items</h2>
-						<form action="">
-
-						</form>
 						<th:block th:each="product : ${products}">
 
 							<div class="col-sm-4">
@@ -220,7 +217,7 @@
 												<h2 th:text="${product.price}"></h2>
 												<p th:text="${product.name}"></p>
 											</a>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+											<a th:href="@{/cart/addCart/__${product.productId}__}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 										</div>
 <!--										<div class="product-overlay">-->
 <!--											<div class="overlay-content">-->
@@ -245,6 +242,13 @@
 			</div>
 		</div>
 	</section>
+
+	<hr>
+	<div style="text-align: center;color: saddlebrown">
+		<a th:href="@{'/products'(page=${products.number})}" th:if="${products.hasPrevious()}">Previous</a>
+		<span th:text="${products.number + 1}"></span>/<span th:text="${products.totalPages}"></span>
+		<a th:href="@{'/products'(page=${products.number + 2})}" th:if="${products.hasNext()}">Next</a>
+	</div>
 	
 	<footer id="footer"><!--Footer-->
 		<div class="footer-top">
