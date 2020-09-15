@@ -112,6 +112,20 @@ public class CartController {
         }
     }
 
+    @DeleteMapping("/delete/{cartId}")
+    public ResponseEntity<Cart> delete(@PathVariable Long cartId) {
+            cartService.remove(cartId);
+            return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/quantity/{cartId}")
+    public ResponseEntity<Cart> increase(@PathVariable Long cartId, @RequestBody int quantity) {
+        Cart cart = cartService.findByCartId(cartId);
+        cart.setQuantity(quantity);
+        cartService.save(cart);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
     @GetMapping("/list")
     public ModelAndView list(){
@@ -132,9 +146,4 @@ public class CartController {
         return "redirect:/cart/list";
     }
 
-    @DeleteMapping("/delete/{cart_id}")
-    public ResponseEntity<Cart> delete(@PathVariable Long cart_id) {
-        cartService.remove(cart_id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
 }

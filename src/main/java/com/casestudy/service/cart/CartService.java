@@ -11,7 +11,7 @@ public interface CartService {
 
     Iterable<Cart> findAll();
 
-    Optional<Cart> findByCartId(Long cart_id);
+    Cart findByCartId(Long cart_id);
 
     void save(Cart cart);
 

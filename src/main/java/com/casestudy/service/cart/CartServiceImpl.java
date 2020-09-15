@@ -23,8 +23,8 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Optional<Cart> findByCartId(Long cart_id) {
-        return cartRepository.findById(cart_id);
+    public Cart findByCartId(Long cart_id) {
+        return cartRepository.findById(cart_id).orElse(null);
     }
 
     @Override

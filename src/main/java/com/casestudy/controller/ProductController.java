@@ -89,9 +89,6 @@ public class ProductController {
         return modelAndView;
 
 
-//        ModelAndView modelAndView = new ModelAndView("/eshopper/index");
-//        modelAndView.addObject("products", productService.findAll(pageable));
-//        return modelAndView;
     }
 
     @GetMapping("/create")
@@ -197,8 +194,6 @@ public class ProductController {
         productService.remove(product.getProductId());
         return "redirect:/product/list";
     }
-
-
 
 
 }

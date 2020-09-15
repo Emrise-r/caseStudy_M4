@@ -18,40 +18,8 @@
     <!--[if lt IE 9]>
 	<script src="/js/html5shiv.js"></script>
 	<script src="/js/respond.min.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script type="text/javascript" >
-		$('.cart_quantity_down').on('click', function(e) {
-			e.preventDefault();
-			let $this = $(this);
-			let $input = $this.closest('div').find('input');
-			let value = parseInt($input.val());
+	<script src="/ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-			if (value >= 1) {
-				value = value - 1;
-			} else {
-				value = 0;
-			}
-
-			$input.val(value);
-
-		});
-
-		$('.cart_quantity_up').on('click', function(e) {
-			e.preventDefault();
-			let $this = $(this);
-			let $input = $this.$('.cart_quantity_input');
-			let value = parseInt($input.val());
-
-			if (value >= 1) {
-				value = value + 1;
-			} else {
-				value = 0;
-			}
-
-			$input.val(value);
-
-		});
-	</script>
 
 	<![endif]-->
 	<link rel="shortcut icon" href="/images/ico/favicon.ico">
@@ -59,126 +27,128 @@
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/ico/apple-touch-icon-114-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/ico/apple-touch-icon-72-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" href="/images/ico/apple-touch-icon-57-precomposed.png">
+
 </head><!--/head-->
 
 <body>
-	<header id="header"><!--header-->
-		<div class="header_top"><!--header_top-->
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="contactinfo">
-							<ul class="nav nav-pills">
-								<li><a href=""><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
-								<li><a href=""><i class="fa fa-envelope"></i> info@domain.com</a></li>
-							</ul>
-						</div>
+<header id="header"><!--header-->
+	<div class="header_top"><!--header_top-->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="contactinfo">
+						<ul class="nav nav-pills">
+							<li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
+							<li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
+						</ul>
 					</div>
-					<div class="col-sm-6">
-						<div class="social-icons pull-right">
-							<ul class="nav navbar-nav">
-								<li><a href=""><i class="fa fa-facebook"></i></a></li>
-								<li><a href=""><i class="fa fa-twitter"></i></a></li>
-								<li><a href=""><i class="fa fa-linkedin"></i></a></li>
-								<li><a href=""><i class="fa fa-dribbble"></i></a></li>
-								<li><a href=""><i class="fa fa-google-plus"></i></a></li>
-							</ul>
-						</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="social-icons pull-right">
+						<ul class="nav navbar-nav">
+							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+							<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+						</ul>
 					</div>
 				</div>
 			</div>
-		</div><!--/header_top-->
-		
-		<div class="header-middle"><!--header-middle-->
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4 clearfix">
-						<div class="logo pull-left">
-							<a href="index.html"><img src="/images/home/logo.png" alt="" /></a>
-						</div>
-						<div class="btn-group pull-right clearfix">
-							<div class="btn-group">
-								<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-									USA
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-									<li><a href="">Canada</a></li>
-									<li><a href="">UK</a></li>
-								</ul>
-							</div>
-							
-							<div class="btn-group">
-								<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-									DOLLAR
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-									<li><a href="">Canadian Dollar</a></li>
-									<li><a href="">Pound</a></li>
-								</ul>
-							</div>
-						</div>
+		</div>
+	</div><!--/header_top-->
+
+	<div class="header-middle"><!--header-middle-->
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 clearfix">
+					<div class="logo pull-left">
+						<a href="index.html"><img src="/images/home/logo.png" alt="" /></a>
 					</div>
-					<div class="col-md-8 clearfix">
-						<div class="shop-menu clearfix pull-right">
-							<ul class="nav navbar-nav">
-								<li><a href=""><i class="fa fa-user"></i> Account</a></li>
-								<li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
-								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-								<li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div><!--/header-middle-->
-	
-		<div class="header-bottom"><!--header-bottom-->
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-9">
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
+					<div class="btn-group pull-right clearfix">
+						<div class="btn-group">
+							<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
+								Language
+								<span class="caret"></span>
 							</button>
+							<ul class="dropdown-menu">
+								<li><a href="">ENG</a></li>
+								<li><a href="">VIE</a></li>
+							</ul>
 						</div>
-						<div class="mainmenu pull-left">
-							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="index.html">Home</a></li>
-								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.html">Products</a></li>
-										<li><a href="product-details.html">Product Details</a></li> 
-										<li><a href="checkout.html">Checkout</a></li> 
-										<li><a href="cart.html" class="active">Cart</a></li> 
-										<li><a href="login.html">Login</a></li> 
-                                    </ul>
-                                </li> 
-								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.html">Blog List</a></li>
-										<li><a href="blog-single.html">Blog Single</a></li>
-                                    </ul>
-                                </li> 
-								<li><a href="error.html">404</a></li>
-								<li><a href="contact-us.html">Contact</a></li>
+
+						<div class="btn-group">
+							<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
+								Currency
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li><a href="">VND</a></li>
+								<li><a href="">USD</a></li>
 							</ul>
 						</div>
 					</div>
-					<div class="col-sm-3">
-						<div class="search_box pull-right">
-							<input type="text" placeholder="Search"/>
-						</div>
+				</div>
+				<div class="col-md-8 clearfix">
+					<div class="shop-menu clearfix pull-right">
+						<ul class="nav navbar-nav">
+							<li><a sec:authorize="isAuthenticated()" class="nav-link" href="/home/edit"><i class="fa fa-user"></i> <span th:text="${username}" style="font-weight: bold"></span></a></li>
+							<li class="nav-item">
+								<a sec:authorize="isAuthenticated()" class="nav-link" href="/home/edit"><i class="fa fa-user" aria-hidden="true"></i><span th:text="${role}" style="font-weight: bold"></span></a>
+							</li>
+							<!--								<a sec:authorize="isAuthenticated()" class="nav-link" href="/home/edit"><i class="fa fa-user" aria-hidden="true"></i><span th:text="${username}" style="font-weight: bold"></span></a>-->
+							<!--								<li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>-->
+							<!--								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>-->
+							<li><a  class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/cart/}"><i class="fa fa-shopping-cart"></i>Cart</a></li>
+							<!--								<li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>-->
+							<li class="nav-item">
+								<a class="nav-link" sec:authorize="isAuthenticated()" href="/home/logout"><i class="fa fa-sign-out"></i>SIGN OUT</a>
+								<a class="nav-link" sec:authorize="isAnonymous()" href="/home/login"><i class="fa fa-lock"></i>SIGN IN</a>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</div>
-		</div><!--/header-bottom-->
-	</header><!--/header-->
+		</div>
+	</div><!--/header-middle-->
+
+	<div class="header-bottom"><!--header-bottom-->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-9">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div>
+					<div class="mainmenu pull-left">
+						<ul class="nav navbar-nav collapse navbar-collapse">
+							<!--								<li><a href="index.html" class="active">Home</a></li>-->
+							<li class="dropdown" ><a href="#">Category<i class="fa fa-angle-down"></i></a>
+								<ul role="menu" class="sub-menu">
+									<th:block th:each="category : ${categories}">
+										<li>
+											<a th:href="@{'/product/category'+${category.categoryId}}"
+											   th:text="${category.name}"></a></li>
+									</th:block>
+								</ul>
+							</li>
+							<li><a href="contact-us.html">Contact</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="search_box pull-right">
+						<input type="text" placeholder="Search by name"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!--/header-bottom-->
+</header><!--/header-->
 
 	<section id="cart_items">
 		<div class="container">
@@ -192,8 +162,8 @@
 				<table class="table table-condensed">
 					<thead>
 						<tr class="cart_menu">
-							<td class="image">Item</td>
-							<td class="description"></td>
+							<td class="image">Image</td>
+							<td class="Name"> Name</td>
 							<td class="price">Price</td>
 							<td class="quantity">Quantity</td>
 							<td class="total">Total</td>
@@ -201,8 +171,11 @@
 						</tr>
 					</thead>
 					<tbody>
-						<th:block th:each="cart : ${carts}" >
+						<th:block th:each="cart,iter : ${carts}" >
 							<tr>
+<!--								<p1 id="index" name="cartId" type="hidden" th:text="*{cart.cartId}"></p1> -->
+									<input id="cartId" name="cartId" type="hidden" th:text="*{cart.cartId}">
+<!--										<p th:type="hidden" t></p>-->
 								<td class="cart_product">
 									<a href=""><img th:src="@{'/i/'+${cart.product.img}}" width="150" height="100"/></a>
 								</td>
@@ -210,80 +183,40 @@
 									<h4 th:text="${cart.product.name}"><a href=""></a></h4>
 								</td>
 								<td class="cart_price">
-									<p th:text="${cart.product.price}"></p>
+									<p th:id="price+${iter.index}" th:text="${cart.product.price}"></p>
 								</td>
 								<td class="cart_quantity">
 									<div class="cart_quantity_button">
-										<a class="cart_quantity_down" href="#" id="down"> - </a>
+										<a class="cart_quantity_down" th:href="${iter.index}" id="down"> - </a>
 
 										<input class="cart_quantity_input" type="text" name="quantity" autocomplete="off" size="2" th:value="${cart.quantity}" >
 
-										<a class="cart_quantity_up" href="#" id="up" > + </a>
+										<a class="cart_quantity_up" th:href="${iter.index}" id="up"> + </a>
 									</div>
 								</td>
 								<td class="cart_total">
-									<p class="cart_total_price" th:text="${cart.product.price} * ${cart.quantity}"></p>
+									<p1 class="cart_total_price" th:id="totalprice+${iter.index}" th:text="${cart.product.price} * ${cart.quantity}"></p1>
 								</td>
 								<td class="cart_delete">
-									<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+									<a class="cart_quantity_delete" th:href="${cart.cartId}"><i class="fa fa-times"></i></a>
 								</td>
 							</tr>
 						</th:block>
-
-<!--						<tr>-->
-<!--							<td class="cart_product">-->
-<!--								<a href=""><img src="/images/cart/two.png" alt=""></a>-->
-<!--							</td>-->
-<!--							<td class="cart_description">-->
-<!--								<h4><a href="">Colorblock Scuba</a></h4>-->
-<!--								<p>Web ID: 1089772</p>-->
-<!--							</td>-->
-<!--							<td class="cart_price">-->
-<!--								<p>$59</p>-->
-<!--							</td>-->
-<!--							<td class="cart_quantity">-->
-<!--								<div class="cart_quantity_button">-->
-<!--									<a class="cart_quantity_up" href=""> - </a>-->
-<!--									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">-->
-<!--									<a class="cart_quantity_down" href=""> + </a>-->
-<!--								</div>-->
-<!--							</td>-->
-<!--							<td class="cart_total">-->
-<!--								<p class="cart_total_price">$59</p>-->
-<!--							</td>-->
-<!--							<td class="cart_delete">-->
-<!--								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>-->
-<!--							</td>-->
-<!--						</tr>-->
-<!--						<tr>-->
-<!--							<td class="cart_product">-->
-<!--								<a href=""><img src="/images/cart/three.png" alt=""></a>-->
-<!--							</td>-->
-<!--							<td class="cart_description">-->
-<!--								<h4><a href="">Colorblock Scuba</a></h4>-->
-<!--								<p>Web ID: 1089772</p>-->
-<!--							</td>-->
-<!--							<td class="cart_price">-->
-<!--								<p>$59</p>-->
-<!--							</td>-->
-<!--							<td class="cart_quantity">-->
-<!--								<div class="cart_quantity_button">-->
-<!--									<a class="cart_quantity_up" href=""> - </a>-->
-<!--									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">-->
-<!--									<a class="cart_quantity_down" href=""> + </a>-->
-<!--								</div>-->
-<!--							</td>-->
-<!--							<td class="cart_total">-->
-<!--								<p class="cart_total_price">$59</p>-->
-<!--							</td>-->
-<!--							<td class="cart_delete">-->
-<!--								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>-->
-<!--							</td>-->
-<!--						</tr>-->
+						<tr>
+							<hr>
+						</tr>
+						<tr>
+							<td><p>Total Price</p></td>
+							<td class="cart_total">
+								<p class="cart_total_price"></p>
+							</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
+		<script>
+		</script>
 	</section> <!--/#cart_items-->
 
 	<footer id="footer"><!--Footer-->
@@ -443,13 +376,12 @@
 		</div>
 		
 	</footer><!--/Footer-->
-	
-
 
     <script src="/js/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/jquery.scrollUp.min.js"></script>
     <script src="/js/jquery.prettyPhoto.js"></script>
     <script src="/js/main.js"></script>
+	<script src="/javascript/cart-up-down-button.js"></script>
 </body>
 </html>
