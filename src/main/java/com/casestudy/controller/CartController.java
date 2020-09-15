@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -79,6 +80,11 @@ public class CartController {
         ModelAndView modelAndView = new ModelAndView("/eshopper/cart");
         Iterable<Cart> carts = cartService.findAllByOrderNumberAndUser(this.getUser().getOrderNumber(), this.getUser());
         modelAndView.addObject("carts", carts);
+        Long total = Long.valueOf(0);
+        for (Cart cart : carts) {
+            total += cart.getQuantity() * cart.getProduct().getPrice();
+        }
+        modelAndView.addObject("total", total);
         return modelAndView;
     }
 
