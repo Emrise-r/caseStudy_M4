@@ -125,6 +125,28 @@ public class CartController {
 //        }
 //    }
 
+    @GetMapping("/addCart/{productId}")
+    public ModelAndView addCart(@PathVariable Long productId) {
+//        ModelAndView modelAndView = new ModelAndView("/eshopper/cart");
+        Cart cart = cartService.findByProductAndUserAndOrderNumber(productService.findByProductId(productId), this.getUser(), this.getUser().getOrderNumber());
+        if (cart != null) {
+            cart.setQuantity(cart.getQuantity() + 1);
+            cartService.save(cart);
+            return this.showCart();
+//            Long countOrder = cartService.countByOrderNumberAndUser(this.getUser().getOrderNumber(), this.getUser());
+        }
+        cart = new Cart();
+        if(this.getUser().getOrderNumber() == null) {
+            this.getUser().setOrderNumber(Long.valueOf(1));
+        }
+        cart.setOrderNumber(this.getUser().getOrderNumber());
+        cart.setQuantity(Long.valueOf(1));
+        cart.setProduct(productService.findByProductId(productId));
+        cart.setUser(this.getUser());
+        cartService.save(cart);
+        return this.showCart();
+    }
+
     @GetMapping("/addcart/{productId}")
     public ResponseEntity<Long> add(@PathVariable Long productId) {
         Cart cart = cartService.findByProductAndUserAndOrderNumber(productService.findByProductId(productId), this.getUser(), this.getUser().getOrderNumber());
@@ -182,8 +204,8 @@ public class CartController {
     }
 
     @GetMapping("/buy")
-    public ModelAndView buy(){
-        ModelAndView modelAndView = new ModelAndView("");
+    public String buy(){
+
         Iterable<Cart> carts = cartService.findAllByOrderNumberAndUser(this.getUser().getOrderNumber(), this.getUser());
         Long sum = Long.valueOf(0);
         for(Cart cart : carts){
@@ -198,6 +220,6 @@ public class CartController {
         orderDetailsService.save(orderDetails);
         this.getUser().setOrderNumber(this.getUser().getOrderNumber() + 1);
         userService.save(this.getUser());
-        return modelAndView;
+        return "redirect:/product";
     }
 }

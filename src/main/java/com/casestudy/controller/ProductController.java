@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,7 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/product")
 public class ProductController {
 
@@ -195,8 +196,37 @@ public class ProductController {
     @PostMapping("/delete-product")
     public String deleteProduct(@ModelAttribute("product") Product product){
         productService.remove(product.getProductId());
+//        ModelAndView modelAndView = new ModelAndView("product/list");
+////        modelAndView.addObject("message", "Failed Successfully");
+//        return modelAndView;
         return "redirect:/product/list";
     }
 
+    @GetMapping("/detail/{productId}")
+    public ModelAndView showDetail(@PathVariable Long productId) {
+        Product product = productService.findByProductId(productId);
+        ModelAndView modelAndView = new ModelAndView("/eshopper/product-details");
+        modelAndView.addObject("product", product);
+        return modelAndView;
+    }
+
+    @GetMapping("/sort/Descending")
+    public ModelAndView listProductWeak( ){
+        ModelAndView modelAndView= new ModelAndView("/eshopper/index");
+        Sort sort= Sort.by("price");
+        sort=sort.descending();
+        Page<Product> products =  productService.findAll(PageRequest.of(0, 9, sort));
+        modelAndView.addObject("products", products);
+        return modelAndView;
+    }
+    @GetMapping("/sort/Ascending")
+    public ModelAndView listProductIncrease(){
+        ModelAndView modelAndView= new ModelAndView("/eshopper/index");
+        Sort sort= Sort.by("price");
+        sort=sort.ascending();
+        Page<Product> products =  productService.findAll(PageRequest.of(0, 9, sort));
+        modelAndView.addObject("products", products);
+        return modelAndView;
+    }
 
 }
