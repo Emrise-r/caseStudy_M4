@@ -48,8 +48,8 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Cart findByProductAndUser(Product product, User user) {
-        return cartRepository.findByProductAndUser(product, user);
+    public Cart findByProductAndUserAndOrderNumber(Product product, User user, Long orderNumber) {
+        return cartRepository.findByProductAndUserAndOrderNumber(product, user, orderNumber);
     }
 
     @Override

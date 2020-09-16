@@ -161,13 +161,16 @@ public class ProductController {
     public ModelAndView updateProduct(@ModelAttribute("product") Product product) {
         MultipartFile file = product.getImgFile();
         String image = file.getOriginalFilename();
-        String fileUpload = evn.getProperty("file_upload").toString();
-        try {
-            FileCopyUtils.copy(file.getBytes(), new File(fileUpload + image));
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        if (!image.equals("")) {
+            String fileUpload = evn.getProperty("file_upload").toString();
+            try {
+                FileCopyUtils.copy(file.getBytes(), new File(fileUpload + image));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            product.setImg(image);
         }
-        product.setImg(image);
         productService.save(product);
         ModelAndView modelAndView = new ModelAndView("/product/edit");
         modelAndView.addObject("product", product);

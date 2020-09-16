@@ -93,9 +93,19 @@
 					<div class="shop-menu clearfix pull-right">
 						<ul class="nav navbar-nav">
 							<li><a sec:authorize="isAuthenticated()" class="nav-link" href="/home/edit"><i class="fa fa-user"></i> <span th:text="${username}" style="font-weight: bold"></span></a></li>
-							<li class="nav-item">
-								<a sec:authorize="isAuthenticated()" class="nav-link" href="/home/edit"><i class="fa fa-user" aria-hidden="true"></i><span th:text="${role}" style="font-weight: bold"></span></a>
+<!--							<li class="nav-item">-->
+							<li class="dropdown nav-item" th:if="${role == 'ROLE_ADMIN'}" ><a href="">Manager<i class="fa fa-angle-down"></i></a>
+								<ul  class="sub-menu">
+									<li>
+										<a href="/product/list">Product Manager</a>
+									</li>
+
+									<li>
+										<a href="/home/listUser">User Manager</a>
+									</li>
+								</ul>
 							</li>
+<!--							</li>-->
 							<!--								<a sec:authorize="isAuthenticated()" class="nav-link" href="/home/edit"><i class="fa fa-user" aria-hidden="true"></i><span th:text="${username}" style="font-weight: bold"></span></a>-->
 							<!--								<li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>-->
 							<!--								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>-->
@@ -112,42 +122,7 @@
 		</div>
 	</div><!--/header-middle-->
 
-	<div class="header-bottom"><!--header-bottom-->
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-9">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-					</div>
-					<div class="mainmenu pull-left">
-						<ul class="nav navbar-nav collapse navbar-collapse">
-							<!--								<li><a href="index.html" class="active">Home</a></li>-->
-							<li class="dropdown" ><a href="#">Category<i class="fa fa-angle-down"></i></a>
-								<ul role="menu" class="sub-menu">
-									<th:block th:each="category : ${categories}">
-										<li>
-											<a th:href="@{'/product/category'+${category.categoryId}}"
-											   th:text="${category.name}"></a></li>
-									</th:block>
-								</ul>
-							</li>
-							<li><a href="contact-us.html">Contact</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="search_box pull-right">
-						<input type="text" placeholder="Search by name"/>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div><!--/header-bottom-->
+
 </header><!--/header-->
 
 	<section id="cart_items">
@@ -172,10 +147,9 @@
 					</thead>
 					<tbody>
 						<th:block th:each="cart,iter : ${carts}" >
+							<input id="size" name="size" type="hidden" th:value="*{iter.size}">
 							<tr>
-<!--								<p1 id="index" name="cartId" type="hidden" th:text="*{cart.cartId}"></p1> -->
-									<input id="cartId" name="cartId" type="hidden" th:text="*{cart.cartId}">
-<!--										<p th:type="hidden" t></p>-->
+									<input th:id="cartId+${iter.index}" name="cartId" type="hidden" th:value="*{cart.cartId}">
 								<td class="cart_product">
 									<a href=""><img th:src="@{'/i/'+${cart.product.img}}" width="150" height="100"/></a>
 								</td>
@@ -187,39 +161,51 @@
 								</td>
 								<td class="cart_quantity">
 									<div class="cart_quantity_button">
-										<a class="cart_quantity_down" th:href="${iter.index}" id="down"> - </a>
+										<a class="cart_quantity_down" style="text-decoration:none" th:href="${iter.index}" id="down"> - </a>
 
 										<input class="cart_quantity_input" type="text" name="quantity" autocomplete="off" size="2" th:value="${cart.quantity}" >
 
-										<a class="cart_quantity_up" th:href="${iter.index}" id="up"> + </a>
+										<a class="cart_quantity_up" style="text-decoration:none" th:href="${iter.index}" id="up"> + </a>
 									</div>
 								</td>
 								<td class="cart_total">
 									<p1 class="cart_total_price" th:id="totalprice+${iter.index}" th:text="${cart.product.price} * ${cart.quantity}"></p1>
 								</td>
 								<td class="cart_delete">
-									<a class="cart_quantity_delete" th:href="${cart.cartId}"><i class="fa fa-times"></i></a>
+									<a class="cart_quantity_delete" th:href="${cart.cartId}" th:value="*{iter.index}"><i class="fa fa-times"></i></a>
 								</td>
 							</tr>
+							<input th:id="productQuantity+${iter.index}" name="cartId" type="hidden" th:value="*{cart.product.quantity}">
 						</th:block>
 							<hr>
 						<tr>
 							<td class="cart_product">
 							</td>
 							<td  class="cart_description">
-								<p>Total Price</p>
+								<h3>Total Price</h3>
 							</td>
 							<td class="cart_price">
 
 							</td>
 							<td class="cart_quantity">
-
 							</td>
-
 							<td class="cart_total">
-								<p class="cart_total_price" th:text="${total}" ></p>
+								<p id="total" class="cart_total_price" th:text="${total}" ></p>
 							</td>
 						</tr>
+					<tr>
+						<td class="cart_product">
+						</td>
+						<td  class="cart_description">
+						</td>
+						<td class="cart_price">
+						</td>
+						<td class="cart_quantity">
+						</td>
+						<td class="cart_total">
+							<a th:href="@{/cart/buy}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Buy All</a>
+						</td>
+					</tr>
 					</tbody>
 				</table>
 			</div>
@@ -392,5 +378,6 @@
     <script src="/js/jquery.prettyPhoto.js"></script>
     <script src="/js/main.js"></script>
 	<script src="/javascript/cart-up-down-button.js"></script>
+
 </body>
 </html>

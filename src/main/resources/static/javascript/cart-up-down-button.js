@@ -4,7 +4,7 @@ $('.cart_quantity_down').on('click', function(e) {
     let $input = $this.closest('div').find('input');
     let value = parseInt($input.val());
     let href = $this.attr('href');
-    let $total = $("#totalprice" + href);
+    let $totalprice = $("#totalprice" + href);
     let $price = $("#price" + href)
     if (value >= 1) {
         value = value - 1;
@@ -18,12 +18,22 @@ $('.cart_quantity_down').on('click', function(e) {
 
     let total = value * val;
 
-    $total.html(parseInt(total));
+    $totalprice.html(parseInt(total));
 
+    let sum = 0;
+    let $size = $('#size').val();
+    for (let i = 0; i < $size; i++){
+        let n = parseInt($("#totalprice" + i).html());
+        if (n >= 0) {
+            sum += n;
+        };
+    }
+
+    $("#total").html(sum);
 
     // let a = $(this);
     // let cartId = a.attr("href");
-    let cartId = $('#cartId').html();
+    let cartId = $('#cartId'+ href).val();
     $.ajax({
         type:"PUT",
         dataType: 'json',
@@ -41,11 +51,12 @@ $('.cart_quantity_up').on('click', function(e) {
     let value = parseInt($input.val());
     let href = $this.attr('href');
     let $price = $("#price" + href)
-    let $total = $("#totalprice" + href);
-    if (value >= 0) {
+    let $totalprice = $("#totalprice" + href);
+    let productQuantity = $('#productQuantity' + href).val();
+    if (value < productQuantity) {
         value = value + 1;
     } else {
-        value = 0;
+        value = productQuantity;
     }
 
     $input.val(value);
@@ -54,10 +65,20 @@ $('.cart_quantity_up').on('click', function(e) {
 
     let total = value * val;
 
-    $total.html(parseInt(total));
-    // let a = $(this);
-    // let cartId = a.attr("href");
-    let cartId = $('#cartId').html();
+    $totalprice.html(parseInt(total));
+
+    let sum = 0;
+    let $size = $('#size').val();
+    for (let i = 0; i < $size; i++){
+        let n = parseInt($("#totalprice" + i).html());
+        if (n >= 0) {
+            sum += n;
+        };
+    }
+
+    $("#total").html(sum);
+
+    let cartId = $('#cartId'+ href).val();
     $.ajax({
         type:"PUT",
         dataType: 'json',
@@ -70,23 +91,23 @@ $('.cart_quantity_up').on('click', function(e) {
 });
 
 $(document).ready(function () {
-    //sư kiện nào thực hiện Ajax
+
     $('.cart_quantity_delete').click(function(event){
-        // lay du lieu
+
         let a = $(this);
         let cartId = a.attr("href");
-        // goi ajax
+        let $total = $("#total");
+        let index = parseInt(a.attr('value'));
+        let totalprice = parseInt($("#totalprice" + index).html());
+        $total.html(parseInt($total.html()) - totalprice);
         $.ajax({
             type:"DELETE",
-            //tên API
             url:"/cart/delete/"+ cartId,
-            //xử lý khi thành công
             success: function (data) {
                 a.parent().parent().remove();
             }
-
         });
-        //chặn sự kiện mặc định của thẻ
+
         event.preventDefault();
     });
 })

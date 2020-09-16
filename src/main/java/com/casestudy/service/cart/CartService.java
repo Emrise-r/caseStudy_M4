@@ -21,7 +21,7 @@ public interface CartService {
 
     Iterable<Cart> findAllByOrderNumberAndUser(Long orderNumber, User user);
 
-    Cart findByProductAndUser(Product product, User user);
+    Cart findByProductAndUserAndOrderNumber(Product product, User user, Long orderNumber);
 
     Long countByOrderNumberAndUser(Long orderNumber, User user);
 }
