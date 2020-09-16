@@ -138,7 +138,7 @@
 									<ul role="menu" class="sub-menu">
 										<th:block th:each="category : ${categories}">
 											<li>
-												<a th:href="@{'/product/category'+${category.categoryId}}"
+												<a th:href="@{/product/category_product/__${category.categoryId}__}"
 												   th:text="${category.name}"></a></li>
 										</th:block>
 									</ul>
@@ -182,7 +182,7 @@
 						<div class="carousel-inner">
 							<div class="item active">
 								<div class="col-sm-6">
-									<h1><span>Vinh</span>-SHOPPER</h1>
+									<h1><span>XNXX</span>-SHOPPER</h1>
 									<h2></h2>
 									<p> </p>
 									<button type="button" class="btn btn-default get">Get it now</button>
@@ -194,7 +194,7 @@
 							</div>
 							<div class="item">
 								<div class="col-sm-6">
-									<h1><span>Vinh</span>-SHOPPER</h1>
+									<h1><span>XNXX</span>-SHOPPER</h1>
 									<h2>Authentic</h2>
 									<p></p>
 									<button type="button" class="btn btn-default get">Get it now</button>
@@ -206,7 +206,7 @@
 							</div>
 							<div class="item">
 								<div class="col-sm-6">
-									<h1><span>Vinh</span>-SHOPPER</h1>
+									<h1><span>XNXX</span>-SHOPPER</h1>
 									<h2>Free ship within 5 Km</h2>
 									<p></p>
 									<button type="button" class="btn btn-default get">Get it now</button>
@@ -261,7 +261,7 @@
 									<div class="single-products">
 										<div class="productinfo text-center">
 											<a th:href="@{/product/detail/__${product.productId}__ }" style="text-decoration:none">
-												<img th:src="@{'/i/'+${product.img}}" width="300" height="200"/>
+												<img th:src="@{'/i/'+${product.img}}" width="300" height="350"/>
 												<h2 th:text="${product.price}"></h2>
 												<p th:text="${product.name}"></p>
 												<input th:id="productId+${iter.index}" name="cartId" type="hidden" th:value="*{product.productId}">

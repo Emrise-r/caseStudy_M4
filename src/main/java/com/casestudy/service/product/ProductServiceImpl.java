@@ -8,8 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -37,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Iterable<Product> findAllByCategory(Category category, Pageable pageable) {
+    public Page<Product> findAllByCategory(Category category, Pageable pageable) {
         return productRepository.findAllByCategory(category, pageable);
     }
 

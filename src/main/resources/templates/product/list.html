@@ -56,9 +56,9 @@
 </table>
 <hr/>
 <div style="text-align: center;color: saddlebrown">
-    <a th:href="@{'/products'(page=${products.number})}" th:if="${products.hasPrevious()}">Previous</a>
+    <a th:href="@{'/product/list'(page=${products.number})}" th:if="${products.hasPrevious()}">Previous</a>
     <span th:text="${products.number + 1}"></span>/<span th:text="${products.totalPages}"></span>
-    <a th:href="@{'/products'(page=${products.number + 2})}" th:if="${products.hasNext()}">Next</a>
+    <a th:href="@{'/product/list'(page=${products.number + 2})}" th:if="${products.hasNext()}">Next</a>
 </div>
 </body>
 </html>

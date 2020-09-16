@@ -210,21 +210,41 @@ public class ProductController {
         return modelAndView;
     }
 
+
     @GetMapping("/sort/Descending")
-    public ModelAndView listProductWeak( ){
+    public ModelAndView listProductWeak(@RequestParam("s") Optional<String> s){
         ModelAndView modelAndView= new ModelAndView("/eshopper/index");
         Sort sort= Sort.by("price");
         sort=sort.descending();
-        Page<Product> products =  productService.findAll(PageRequest.of(0, 9, sort));
+        Page<Product> products;
+        if(s.isPresent()) {
+            products = productService.findAllByNameContaining(s.get(), PageRequest.of(0, 9, sort));
+        } else {
+            products =  productService.findAll(PageRequest.of(0, 9, sort));
+        }
         modelAndView.addObject("products", products);
         return modelAndView;
     }
     @GetMapping("/sort/Ascending")
-    public ModelAndView listProductIncrease(){
+    public ModelAndView listProductIncrease(@RequestParam("s") Optional<String> s){
         ModelAndView modelAndView= new ModelAndView("/eshopper/index");
         Sort sort= Sort.by("price");
         sort=sort.ascending();
-        Page<Product> products =  productService.findAll(PageRequest.of(0, 9, sort));
+        Page<Product> products;
+        if(s.isPresent()) {
+            products = productService.findAllByNameContaining(s.get(), PageRequest.of(0, 9, sort));
+        } else {
+            products =  productService.findAll(PageRequest.of(0, 9, sort));
+        }
+        modelAndView.addObject("products", products);
+        return modelAndView;
+    }
+
+    @GetMapping("/category_product/{categoryId}")
+    public ModelAndView showProductByCategory(@PathVariable Long categoryId,Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("/eshopper/index");
+        Category category = categoryService.findByCategoryId(categoryId);
+        Page<Product> products = productService.findAllByCategory(category,pageable);
         modelAndView.addObject("products", products);
         return modelAndView;
     }
